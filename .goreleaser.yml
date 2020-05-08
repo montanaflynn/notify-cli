@@ -3,6 +3,9 @@ builds:
   binary: notify
   env:
   - CGO_ENABLED=0
+  ldflags:
+    - -X github.com/montanaflynn/notify-cli.version=v{{.Version}}
+    - -X github.com/montanaflynn/notify-cli.commit={{.Commit}}
 archives:
 - replacements:
     darwin: Darwin

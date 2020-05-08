@@ -2,10 +2,16 @@ package notifier
 
 import (
 	"fmt"
+	"os"
 	"strings"
 
 	"github.com/davecgh/go-spew/spew"
 	"github.com/docopt/docopt-go"
+)
+
+var (
+	version = "unknown"
+	commit  = "unknown"
 )
 
 var usageString = strings.TrimSpace(`
@@ -38,7 +44,8 @@ Examples:
 
 // Usage parses command line command and flags
 func Usage() (*docopt.Opts, error) {
-	options, err := docopt.ParseDoc(usageString)
+	version := fmt.Sprintf("Version: %s\nCommit: %s", version, commit)
+	options, err := docopt.ParseArgs(usageString, os.Args[1:], version)
 	if err != nil {
 		return nil, err
 	}
