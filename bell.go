@@ -1,6 +1,8 @@
-package main
+package notifier
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type bellNotifier struct{}
 

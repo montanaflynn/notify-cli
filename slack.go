@@ -1,4 +1,4 @@
-package main
+package notifier
 
 import (
 	"fmt"
@@ -30,11 +30,11 @@ func (s *slackNotifier) Notify() error {
 	}
 
 	if channelID == "" {
-		return fmt.Errorf("Could not find channel: %s", s.channel)
+		return fmt.Errorf("Notify: Could not find channel: %s", s.channel)
 	}
 
 	if s.verbose {
-		fmt.Printf("Sending message %s to slack\n", s.message)
+		fmt.Printf("Notify: Sending message %s to slack\n", s.message)
 	}
 
 	text := s.message
@@ -49,7 +49,7 @@ func (s *slackNotifier) Notify() error {
 	}
 
 	if s.verbose {
-		fmt.Println("Sent message to slack without an error")
+		fmt.Println("Notify: Sent message to slack without an error")
 	}
 
 	return nil

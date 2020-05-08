@@ -1,6 +1,11 @@
 # Notify CLI
 
-Get notified when a command finishes.
+Get notified when a command finishes. Here's an example that sends a notification to slack:
+
+```sh
+sleep 10 && echo "hello world" | notify slack --token='xxxx-xxxxxxxxx-xxxx' --channel='#notifications'
+hello world
+```
 
 ### Why?
 
@@ -8,27 +13,27 @@ Instead of constantly checking a long running command you can get notified when 
 
 ### How?
 
-Install `notify-cli` pre-compiled from `gobinaries` or from source if you have `go` installed:
+Install `notify` pre-compiled from `gobinaries` or from source if you have `go` installed:
 
 ```sh
 # Using gobinaries
-curl -sf https://gobinaries.com/montanaflynn/notify-cli | sh
+curl -sf https://gobinaries.com/montanaflynn/notify-cli/cmd/notify | sh
 
 # From source
-go get github.com/montanaflynn/notify-cli
+go get github.com/montanaflynn/notify-cli/cmd/notify
 ```
 
-Then add `| notify-cli` to the end of a command. By default it makes a bell sound when the command finishes but can be configured to send a slack message or a webhook instead. Here's the usage from `notify-cli --help`:
+Then add `| notify` to the end of a command. By default it makes a bell sound when the command finishes but can be configured to send a slack message or a webhook instead. Here's the usage from `notify --help`:
 
 ```
-Notify CLI
+Notify
 
 Usage:
-  notify-cli
-  notify-cli slack --token=<token> --channel=<channel> [--verbose] [--debug]
-  notify-cli webhook --url=<url> [--method=<method>] [--body=<body>] [--headers=<headers>] [--verbose] [--debug]
-  notify-cli -h | --help
-  notify-cli --version
+  notify
+  notify slack --token=<token> --channel=<channel> [--verbose] [--debug]
+  notify webhook --url=<url> [--method=<method>] [--body=<body>] [--headers=<headers>] [--verbose] [--debug]
+  notify -h | --help
+  notify --version
 
 Flags:
   -h --help            Show this screen.
@@ -40,5 +45,10 @@ Flags:
   --url=<url>          Request URL [required, syntax: 'STRING']
   --method=<method>    Request method [optional, default: "GET", syntax: 'STRING']
   --body=<body>        Request body [optional, default: '', syntax: 'STRING']
-  --headers=<headers>  Request headers [optional, default: '[]', syntax: '[api-key=token, user-agent=notify-cli]']
+  --headers=<headers>  Request headers [optional, default: '{}', syntax: '{"key":"val", "foo":"bar"}']
+
+Examples:
+  echo "hello world" | notify
+  echo "hello world" | notify slack --token='xxxx-xxxxxxxxx-xxxx' --channel='#notifications'
+  echo "hello world" | notify webhook --url=http://requestbin.net/r/1897yhr1 --headers='{"key":"val", "foo":"bar"}'
 ```

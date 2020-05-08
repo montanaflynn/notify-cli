@@ -1,6 +1,7 @@
-package main
+package notifier
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"strings"
@@ -19,13 +20,17 @@ type webhookNotifier struct {
 
 func (w *webhookNotifier) Notify() error {
 	if w.debug {
-		fmt.Printf("Sending %s Request to %s with body %s\n", w.method, w.url, w.body)
+		fmt.Printf("Notify: Sending %s Request to %s with body %s\n", w.method, w.url, w.body)
 	}
 
 	client := http.Client{}
 	req, err := http.NewRequest(w.method, w.url, strings.NewReader(w.body))
 	if err != nil {
 		return err
+	}
+
+	for k, v := range w.headers {
+		req.Header.Add(k, v)
 	}
 
 	res, err := client.Do(req)
@@ -36,7 +41,7 @@ func (w *webhookNotifier) Notify() error {
 	defer res.Body.Close()
 
 	if w.verbose || w.debug {
-		fmt.Printf("Webhook returned status: %d\n", res.StatusCode)
+		fmt.Printf("Notify: Webhook returned status: %d\n", res.StatusCode)
 	}
 	return err
 }
@@ -63,14 +68,12 @@ func newWebhookNotifier(options docopt.Opts) (*webhookNotifier, error) {
 
 	headersRaw, _ := options["--headers"]
 	if headersRaw != nil {
-		headersString := headersRaw.(string)
-		headersSlice := strings.Split(headersString, ",")
-		headersMap := make(map[string]string)
-		for _, header := range headersSlice {
-			headerSlice := strings.Split(header, "=")
-			headersMap[strings.TrimSpace(headerSlice[0])] = strings.TrimSpace(headerSlice[1])
+		var headers map[string]string
+		err := json.Unmarshal([]byte(headersRaw.(string)), &headers)
+		if err != nil {
+			return nil, err
 		}
-		notifier.headers = headersMap
+		notifier.headers = headers
 	}
 
 	verbose, _ := options["--verbose"]
