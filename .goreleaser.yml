@@ -1,9 +1,10 @@
 builds:
-- env:
+- main: ./cmd/notify/main.go
+  binary: notify
+  env:
   - CGO_ENABLED=0
-  main: ./cmd/notify/main.go
-archive:
-  replacements:
+archives:
+- replacements:
     darwin: Darwin
     linux: Linux
     windows: Windows
