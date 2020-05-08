@@ -52,5 +52,5 @@ Flags:
 Examples:
   echo "hello world" | notify
   echo "hello world" | notify slack --token='xxxx-xxxxxxxxx-xxxx' --channel='#notifications'
-  echo "hello world" | notify webhook --url=http://requestbin.net/r/1897yhr1 --headers='{"key":"val", "foo":"bar"}'
+  echo "hello world" | notify webhook --url=https://httpstat.us/200 --headers='{"key":"val", "foo":"bar"}'
 ```
