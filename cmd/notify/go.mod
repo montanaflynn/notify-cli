@@ -1,4 +1,4 @@
-module github.com/montanaflynn/notify-cli/cmd/notify-cli
+module github.com/montanaflynn/notify-cli/cmd/notify
 
 go 1.14
 
