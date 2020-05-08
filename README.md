@@ -1,17 +1,15 @@
 # Notify CLI
 
-Get notified when a command finishes. Here's an example that sends a notification to slack:
+Instead of constantly checking a long running command you can get notified when it finishes.
+
+Here's an example that sends a notification to slack:
 
 ```sh
 sleep 10 && echo "hello world" | notify slack --token='xxxx-xxxxxxxxx-xxxx' --channel='#notifications'
 hello world
 ```
 
-### Why?
-
-Instead of constantly checking a long running command you can get notified when it finishes.
-
-### How?
+### Install
 
 You can download and install the latest version of `notify` from [GitHub releases](https://github.com/montanaflynn/notify-cli/releases).
 
@@ -24,6 +22,8 @@ curl -sf https://gobinaries.com/montanaflynn/notify-cli/cmd/notify | sh
 # From source
 go get github.com/montanaflynn/notify-cli/cmd/notify
 ```
+
+### Usage
 
 Once installed add `| notify` to the end of a command. By default it makes a bell sound when the command finishes but can be configured to send a slack message or a webhook instead. Here's the usage from `notify --help`:
 
