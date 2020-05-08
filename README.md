@@ -13,7 +13,9 @@ Instead of constantly checking a long running command you can get notified when 
 
 ### How?
 
-Install `notify` pre-compiled from `gobinaries` or from source if you have `go` installed:
+You can download and install the latest version of `notify` from [GitHub releases](https://github.com/montanaflynn/notify-cli/releases).
+
+You can also install a pre-compiled `notify` from [gobinaries](https://gobinaries.com/) or from the latest source if you have `go` installed:
 
 ```sh
 # Using gobinaries
@@ -23,7 +25,7 @@ curl -sf https://gobinaries.com/montanaflynn/notify-cli/cmd/notify | sh
 go get github.com/montanaflynn/notify-cli/cmd/notify
 ```
 
-Then add `| notify` to the end of a command. By default it makes a bell sound when the command finishes but can be configured to send a slack message or a webhook instead. Here's the usage from `notify --help`:
+Once installed add `| notify` to the end of a command. By default it makes a bell sound when the command finishes but can be configured to send a slack message or a webhook instead. Here's the usage from `notify --help`:
 
 ```
 Notify
