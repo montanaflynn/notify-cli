@@ -9,11 +9,6 @@ import (
 	"github.com/docopt/docopt-go"
 )
 
-var (
-	version = "unknown"
-	commit  = "unknown"
-)
-
 var usageString = strings.TrimSpace(`
 Notify
 
@@ -43,9 +38,9 @@ Examples:
 `)
 
 // Usage parses command line command and flags
-func Usage() (*docopt.Opts, error) {
-	version := fmt.Sprintf("Version: %s\nCommit: %s", version, commit)
-	options, err := docopt.ParseArgs(usageString, os.Args[1:], version)
+func Usage(version, commit string) (*docopt.Opts, error) {
+	versionOutput := fmt.Sprintf("Version: %s\nCommit: %s", version, commit)
+	options, err := docopt.ParseArgs(usageString, os.Args[1:], versionOutput)
 	if err != nil {
 		return nil, err
 	}

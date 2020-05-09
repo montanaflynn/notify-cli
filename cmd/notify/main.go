@@ -8,8 +8,13 @@ import (
 	"github.com/montanaflynn/notify-cli"
 )
 
+var (
+	version = "unknown"
+	commit  = "unknown"
+)
+
 func main() {
-	opts, err := notify.Usage()
+	opts, err := notify.Usage(version, commit)
 	if err != nil {
 		log.Fatal(err)
 	}
