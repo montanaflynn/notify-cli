@@ -5,23 +5,23 @@ import (
 	"log"
 	"os"
 
-	notifier "github.com/montanaflynn/notify-cli"
+	"github.com/montanaflynn/notify-cli"
 )
 
 func main() {
-	opts, err := notifier.Usage()
+	opts, err := notify.Usage()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	n, err := notifier.New(*opts)
+	n, err := notify.New(*opts)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	r := bufio.NewReader(os.Stdin)
 	w := bufio.NewWriter(os.Stdout)
-	err = notifier.CommandPipe(r, w, n)
+	err = notify.CommandPipe(r, w, n)
 	if err != nil {
 		log.Fatal(err)
 	}
